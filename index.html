@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#19324a">
+  <link rel="icon" href="assets/site-icon.svg" type="image/svg+xml">
+  <title>金大管樂社｜社團博覽會招生體驗</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="desktopGate" class="desktop-gate" aria-labelledby="desktopGateTitle">
+    <div class="desktop-gate-card">
+      <div class="gate-note">♫</div>
+      <p class="eyebrow">金大管樂社｜社團博覽會</p>
+      <h1 id="desktopGateTitle">此活動暫不支援手機版</h1>
+      <p>為了完整體驗猜歌挑戰與命定樂器測驗，請使用電腦或筆電開啟本網站。</p>
+      <p>現場可向管樂社社員借用電腦體驗！</p>
+    </div>
+  </section>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="topbar-left"><button id="soundToggle" class="ghost-button sound-toggle" type="button" aria-pressed="true">🔊 聲音：開</button><div class="brand"><span class="brand-mark">♫</span><span>金大管樂社</span></div></div>
+      <button class="restart ghost-button" type="button">↻ 重新開始</button>
+    </header>
+    <main>
+      <div class="progress-wrap" aria-label="活動進度">
+        <div class="progress-label"><span id="progressText">準備開始</span><span id="progressPercent">0%</span></div>
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+      </div>
+
+      <section id="start" class="screen active">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">金大社團博覽會 <span>招生體驗</span></p>
+            <h1>尋找你的<br><em>命定樂器</em></h1>
+            <p class="lead">完成三關猜歌挑戰，再測出最適合你的管樂器！</p>
+            <div class="time-note">◷ 全程約需 5 分鐘</div>
+            <p class="notice">建議使用耳機或靠近音源聆聽</p>
+            <button id="startButton" class="primary-button" type="button">開始挑戰 <span>→</span></button>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="staff-lines"></div><div class="music-note note-a">♪</div><div class="music-note note-b">♫</div>
+            <div class="instrument-orbit orbit-one">🎷</div><div class="instrument-orbit orbit-two">🎺</div><div class="instrument-orbit orbit-three">🥁</div>
+            <div class="hero-disc"><span>♬</span><small>LET'S<br>PLAY</small></div>
+          </div>
+        </div>
+        <div class="flow-preview"><span><b>01</b> 猜歌挑戰</span><i>→</i><span><b>02</b> 命定樂器測驗</span><i>→</i><span><b>✦</b> 招生表單</span></div>
+      </section>
+
+      <section id="song" class="screen">
+        <div class="section-heading"><p class="eyebrow">MISSION 01–03 / LISTEN</p><h2 id="songHeading">第一關｜音樂新手村</h2><p id="songInstructions">請選出混音中出現的 3 首歌。每關完全選對才能繼續，答錯可以重新聽與重新選擇。</p></div>
+        <div class="challenge-card">
+          <div class="challenge-top"><span id="songRound">猜歌第 1 關／共 3 關</span><span id="songDone">已完成 0／3</span></div>
+          <div class="song-panel"><div class="record"><span>♫</span></div><div><p class="mini-label">NOW PLAYING</p><h3 id="songTitle">第一關混音</h3><p id="audioHint">點擊播放，聽聽看混音中有哪些歌曲</p></div></div>
+          <div class="audio-controls"><button id="playAudio" class="primary-button small" type="button">▶ 播放</button><button id="pauseAudio" class="secondary-button small" type="button">Ⅱ 暫停</button><button id="replayAudio" class="secondary-button small" type="button">↻ 重新播放</button><span id="playsLeft">可重複播放</span></div>
+          <audio id="songAudio" preload="none"></audio>
+          <audio id="backgroundAudio" src="guess/bgm.mp3" loop preload="none"></audio>
+          <p class="selection-hint">已選擇：<strong id="selectionCount">0</strong>／<span id="songAnswerCount">3</span></p><div id="songOptions" class="answer-grid"></div>
+          <div id="songFeedback" class="feedback" role="status"></div>
+          <div id="songConfirmWrap" class="next-wrap" style="display:block"><button id="songConfirm" class="primary-button" type="button">確認答案</button></div>
+          <div id="songNextWrap" class="next-wrap"><button id="songNext" class="primary-button" type="button">下一關 →</button></div>
+        </div>
+      </section>
+
+      <section id="quiz" class="screen">
+        <div class="section-heading"><p class="eyebrow">MISSION 02 / DISCOVER</p><h2>命定樂器心理測驗</h2><p>直覺選最像你的答案，沒有標準答案！</p></div>
+        <div class="quiz-card"><div class="quiz-meta"><span id="quizCount">第 1 題／共 10 題</span><span id="quizPercent">10%</span></div><div class="quiz-track"><div id="quizProgress" class="quiz-progress"></div></div><h3 id="quizQuestion"></h3><div id="quizOptions" class="quiz-options"></div><div class="quiz-actions"><button id="quizBack" class="secondary-button" type="button">← 上一題</button><button id="quizNext" class="primary-button" type="button">下一題 →</button></div><p id="quizFeedback" class="quiz-feedback" role="status"></p></div>
+      </section>
+
+      <section id="result" class="screen">
+        <div class="result-header"><p class="eyebrow">YOUR MUSICAL SOULMATE</p><h2>你的命定樂器是——</h2></div>
+        <div id="resultRecommendations" class="result-recommendations"></div>
+        <section class="recruit-banner"><div><p class="mini-label">JOIN THE BAND</p><h2>找到想嘗試的樂器了嗎？</h2><p>掃描下方 QR Code 填寫招生表單，加入管樂社後可以認識更多樂器、參加社課，也能現場詢問社員並體驗試吹！</p><ul><li>可至攤位詢問社員、了解社課與樂器試吹</li><li>不確定要學哪一種也沒關係，來現場看看再決定！</li></ul></div><div class="qr-action"><a id="qrLink" href="https://example.com/form" target="_blank" rel="noopener"><div class="qr-placeholder"><img id="qrImage" src="guess/qr.jpg" alt="招生表單 QR Code" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span>招生 QR Code<br>預留位置</span></div></a><a id="formLink" class="primary-button link-button" href="https://example.com/form" target="_blank" rel="noopener">我要加入管樂社</a></div></section>
+        <button class="restart primary-button result-restart" type="button">↻ 重新測驗</button><p class="result-disclaimer">這是我們最推薦你的樂器，但只要有興趣，任何樂器都可以嘗試！</p>
+      </section>
+    </main>
+    <footer>金大管樂社 · 社團博覽會招生體驗 · 讓每個人都找到自己的節拍</footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+const recruitmentConfig={formUrl:'https://docs.google.com/forms/d/171HqTCPs2lEYTs8X1SIGBCQsMfRfTmEQjLiaTNbyZFU/viewform',qrImage:'guess/qr.jpg'};
+const backgroundMusicConfig={audio:'guess/bgm.mp3'};
+/* 可替換設定：題庫、答案、QR Code、表單網址與樂器內容集中在這裡。 */
+const CONFIG={
+  /* 三關猜歌設定：每關固定 15 個選項，answer 是混音中全部歌曲。 */
+  guessLevels:[
+    {title:'第一關｜音樂新手村',audio:'guess/level-1.mp3',answer:['擱淺','小幸運','不曾寧靜的夜'],options:['擱淺','小幸運','不曾寧靜的夜','退後','說好的幸福呢','可惜沒如果','修煉愛情','她說','給我一個理由忘記','我好想你','怎麼了','愛人錯過','遺憾','體面','說好不哭']},
+    {title:'第二關｜你的歌單開始被檢查',variants:[
+      {audio:'guess/level-2-a.mp3',answer:['Golden','跳樓機','沒出息','匆匆那年','愛情的大壞蛋'],options:['Golden','跳樓機','沒出息','匆匆那年','愛情的大壞蛋','APT.','Ditto','Super Shy','Magnetic','晚安大小姐','我們不一樣','年少有為','演員','失落沙洲','如果雨之後']},
+      {audio:'guess/level-2-b.mp3',answer:['那些年','天黑請閉眼','知足','嘉賓','太陽與地球'],options:['那些年','天黑請閉眼','知足','嘉賓','太陽與地球','我懷念的','會呼吸的痛','聽說你','兜圈','愛錯','愛你','慢冷','不為誰而作的歌','怎麼辦','刻在我心底的名字']}
+    ]},
+    {title:'第三關｜真的是耳朵，不是玄學嗎？',audio:'guess/level-3.mp3',answer:['我很好騙','離開的一路上','如果可以','以後別做朋友','晴天','想見你想見你想見你'],options:['我很好騙','離開的一路上','如果可以','以後別做朋友','晴天','想見你想見你想見你','我好想你','有一種悲傷','說散就散','還是會','倒帶','說謊','給我一個理由忘記','最後一頁','你，好不好？']}
+  ],
+  recruitment:{qr:recruitmentConfig.qrImage,url:recruitmentConfig.formUrl},
+  instruments:{
+    flute:{name:'長笛',icon:'🎶',tags:['細膩靈活','清亮旋律','優雅有主見'],why:'你對細節很敏銳，也喜歡用靈活的方式表達自己。長笛的高音與旋律線條，正好能讓你的想法飛起來。',feature:'音色清澈明亮，經常負責快速旋律和高音部分。',role:'高音旋律、快速樂句與華麗裝飾音。',tip:'先練穩定長音與氣流，不用急著挑戰高音。',quote:'看起來優雅，實際上肺活量正在燃燒。'},
+    clarinet:{name:'單簧管',icon:'🎵',tags:['溫暖沉穩','百變音色','團隊核心'],why:'你觀察入微、做事可靠，總能在團體需要時補上關鍵的一塊。單簧管會把這份穩定變成很有魅力的聲音。',feature:'音域寬廣，能演奏溫暖低音，也能演奏靈活明亮的旋律。',role:'主旋律、和聲、快速樂句及低音支撐。',tip:'選對簧片硬度，先把長音吹穩，聲音就會更漂亮。',quote:'外表低調，但經常默默接管整首曲子。'},
+    sax:{name:'薩克斯風',icon:'🎷',tags:['有個性','表現力強','溫暖有存在感'],why:'你有自己的味道，不怕讓個性被聽見。薩克斯風的彈性與表現力，會讓你的每一句旋律都很有記憶點。',feature:'音色溫暖又有存在感，適合流行、爵士及管樂合奏。',role:'中音旋律、對旋律、和聲與特殊音色段落。',tip:'注意簧片保養和排水，先練自然的嘴型與穩定氣息。',quote:'你不是故意搶鏡，只是音色不允許你低調。'},
+    trumpet:{name:'小號',icon:'🎺',tags:['熱情自信','明亮有力','舞台焦點'],why:'你充滿能量，遇到關鍵時刻會勇敢站出來。小號的明亮與力量，正適合你的舞台氣場。',feature:'音色響亮，經常負責重要旋律及充滿氣勢的段落。',role:'高音主旋律、強拍、號角感樂句。',tip:'不要一味用力吹，嘴唇放鬆且穩定更容易吹準。',quote:'不一定想當主角，但大家一定會聽見你。'},
+    horn:{name:'法國號',icon:'📯',tags:['溫柔細膩','擅長融合','安靜可靠'],why:'你重視整體感受，擅長把不同的人和聲音放在一起。法國號的溫暖色彩，會讓你的細膩被大家感受到。',feature:'音色圓潤溫暖，是木管與銅管之間重要的音色橋梁。',role:'中音和聲、柔和旋律與聲部之間的連接。',tip:'先熟悉幾個常用長音，慢慢建立穩定音準。',quote:'外表溫柔，實際上每天都在和音準搏鬥。'},
+    trombone:{name:'長號',icon:'🎼',tags:['直接有力','帥氣果斷','節奏感強'],why:'你反應快、表達直接，喜歡有份量的聲音。長號的滑管像你的直覺一樣，果斷而且充滿動能。',feature:'以拉管改變音高，聲音厚實，能溫柔也能非常有氣勢。',role:'中低音旋律、節奏支撐、銅管和聲與氣勢段落。',tip:'比起死背位置，更重要的是練耳朵聽出音準。',quote:'你的人生可以不確定，但拉管位置必須確定。'},
+    tuba:{name:'上低音號／低音號',icon:'🎵',tags:['穩定可靠','厚實溫暖','團隊地基'],why:'你是大家可以放心依靠的人，安靜卻很有份量。低音聲部會把你的可靠變成整團最穩的地基。',feature:'負責樂團的聲音基礎，讓整首曲子聽起來更加完整。',role:'中低音旋律、低音根基、節奏重量與整體穩定感。',tip:'先練深呼吸與穩定長音，吹得穩比吹得很大聲更重要。',quote:'你可能坐在最後面，但少了你整團會直接變薄。'},
+    percussion:{name:'打擊樂',icon:'🥁',tags:['節奏靈魂','反應快速','氣氛製造機'],why:'你充滿活力，對節奏和現場氣氛特別敏感。打擊樂需要的專注與反應，正是你的超能力。',feature:'負責節奏、氣氛及各種特殊音效，需要高度專注與反應能力。',role:'速度、節奏、強弱、特殊效果與全場氣氛。',tip:'先練節拍器與穩定拍子，準時進場就是很強的能力。',quote:'休息很多小節，出手時卻決定全團生死。'}
+  },
+  quiz:[
+    ['如果管樂社突然要上台，而你完全沒準備，你會？',['裝得很有自信，反正觀眾看不出來','偷偷觀察旁邊的人吹什麼','冷靜數拍子，至少不要拖累大家','先笑出來，然後努力跟上']],
+    ['朋友突然把一隻鵝交給你照顧，你的第一個反應是？',['帶著牠到處走，讓大家都看到','先幫牠準備舒適的小窩','上網查「鵝一天到底吃多少」','教牠跟著音樂點頭']],
+    ['在團體中，你通常是哪一種角色？',['自然成為帶領大家的人','默默處理大家沒注意到的事情','平常很安靜，偶爾突然做出驚人舉動','負責講幹話和維持氣氛']],
+    ['如果可以選擇一種超能力，你想要？',['走到哪裡都有專屬出場音樂','可以聽見別人內心真正的聲音','永遠不會錯過任何節拍','吹一個音就能把討厭的人震飛']],
+    ['老師上課突然點到你，但你完全不知道答案，你會？',['非常有自信地說出一個答案','小聲詢問旁邊同學','誠實回答「老師，我不知道」','說出一個很好笑但明顯錯誤的答案']],
+    ['你最喜歡哪一種聲音？',['明亮、有穿透力，遠遠就能聽見','溫暖、柔和，聽起來很舒服','低沉、有力量，能撐住整首音樂','節奏清楚，讓人忍不住跟著搖']],
+    ['如果有人在你面前插隊，你會？',['直接提醒對方：「不好意思，這裡要排隊。」','用眼神默默譴責他','先觀察情況，再決定要不要說','開玩笑問他：「你是突然傳送過來的嗎？」']],
+    ['如果你是一種食物，你覺得自己比較像？',['辣味炸雞：存在感超強','草莓蛋糕：溫柔但很有自己的風格','白飯：看起來普通，但少了我就不完整','跳跳糖：完全無法預測下一秒會發生什麼']],
+    ['表演進行到一半，你突然吹錯一個音，你會？',['表情完全不變，假裝那是特別編曲','小小慌張，但立刻跟回大家','冷靜找回拍子，繼續穩住音樂','忍住不笑，表演結束再瘋狂道歉']],
+    ['如果加入管樂社，你最希望得到什麼？',['帥氣的舞台與表演機會','真正學會一項樂器','找到能一起努力的夥伴','獲得一群可以一起發瘋的朋友']]
+  ]
+};
+const SCORE_VALUES=[
+  [{trumpet:3,sax:2,trombone:1},{clarinet:3,horn:2,flute:1},{tuba:3,clarinet:2,horn:1},{percussion:3,sax:2,trombone:1}],
+  [{trumpet:3,sax:2,percussion:1},{horn:3,flute:2,clarinet:1},{tuba:3,clarinet:2,horn:1},{percussion:3,sax:2,flute:1}],
+  [{trumpet:3,trombone:2,sax:1},{clarinet:3,horn:2,tuba:1},{sax:3,flute:2,trumpet:1},{percussion:3,trombone:2,sax:1}],
+  [{trumpet:3,sax:2,flute:1},{horn:3,clarinet:2,flute:1},{percussion:3,tuba:2,trombone:1},{trombone:3,trumpet:2,tuba:1}],
+  [{trumpet:3,sax:2,trombone:1},{horn:3,clarinet:2,flute:1},{tuba:3,clarinet:2,horn:1},{sax:3,percussion:2,trombone:1}],
+  [{trumpet:4,flute:3,sax:1},{clarinet:4,horn:3,sax:1},{tuba:4,trombone:3,horn:1},{percussion:4,sax:3,trombone:1}],
+  [{trombone:3,trumpet:2,clarinet:1},{horn:3,clarinet:2,flute:1},{tuba:3,clarinet:2,horn:1},{sax:3,percussion:2,trumpet:1}],
+  [{trumpet:3,trombone:2,sax:1},{flute:3,horn:2,clarinet:1},{tuba:3,clarinet:2,horn:1},{percussion:3,sax:2,flute:1}],
+  [{trumpet:3,sax:2,trombone:1},{flute:3,clarinet:2,horn:1},{tuba:3,horn:2,clarinet:1},{percussion:3,sax:2,trombone:1}],
+  [{trumpet:3,sax:2,flute:1},{clarinet:3,flute:2,horn:1},{horn:3,tuba:2,clarinet:1},{percussion:3,sax:2,trombone:1}]
+];
+const INSTRUMENT_META={
+  flute:{image:'assets/instruments/flute.png.svg',category:'木管樂器',description:'長笛的聲音清澈明亮，常常負責高音旋律與快速樂句。雖然樂器是金屬製，但它靠吹氣發聲，因此屬於木管樂器。初學需要練習氣流和嘴型，一開始可能只有風聲，但成功吹出第一個穩定聲音後會很有成就感。適合喜歡旋律、注意細節、願意慢慢練習的人。'},
+  clarinet:{image:'assets/instruments/clarinet.png.svg',category:'木管樂器',description:'單簧管使用簧片發聲，音色能溫暖柔和，也能明亮靈活，音域非常廣。它可演奏旋律、和聲與低音支撐，是管樂團非常全能的木管樂器。初學時需要熟悉簧片、嘴型和氣息，但練熟後能演奏許多不同風格的音樂。適合細心、有耐心、配合度高的人。'},
+  sax:{image:'assets/instruments/saxophone.png.svg',category:'木管樂器',description:'薩克斯風外型雖是金屬，但因使用簧片發聲，所以屬於木管樂器。音色厚實、溫暖又有個性，常出現在管樂、流行和爵士音樂中。中音薩克斯風對初學者相對友善，也很容易演奏出有存在感的旋律。適合喜歡展現自己、重視音樂感覺、又想保有個人特色的人。'},
+  trumpet:{image:'assets/instruments/trumpet.png.svg',category:'銅管樂器',description:'小號的聲音響亮、明亮、穿透力強，靠嘴唇震動發聲，再使用三個按鍵改變音高。它能演奏氣勢很強的旋律、號角式段落，也很適合電影配樂和進行曲。初學會需要練習嘴型與耐力，高音尤其有挑戰性，但進步後成就感非常高。適合喜歡挑戰、有自信、想讓自己的聲音被聽見的人。'},
+  horn:{image:'assets/instruments/french-horn.png.svg',category:'銅管樂器',description:'法國號外型是圓形管身，音色圓潤、溫暖而且有層次。它擅長把木管與銅管聲音融合在一起，因此是管樂團裡很重要的中音樂器。法國號的音準控制需要耐心，但也正因為這樣，吹穩後的聲音非常迷人。適合重視團隊、願意傾聽、心思細膩的人。'},
+  trombone:{image:'assets/instruments/trombone.png.svg',category:'銅管樂器',description:'長號最大的特色是用拉管改變音高，而不是按按鍵。它的聲音厚實、有力量，也能透過滑音製造很有趣的效果。長號能吹出雄壯、帥氣的樂句，也能演奏溫暖和幽默的段落。適合反應快、喜歡明確感、想要有舞台動作感的人。'},
+  tuba:{image:'assets/instruments/euphonium-tuba.png.svg',category:'銅管低音樂器',description:'上低音號音色圓潤溫暖，常演奏中低音旋律與和聲；低音號則提供樂團最低、最厚實的聲音，是整個樂團的重要地基。它們不一定總是最顯眼的旋律，但缺少低音聲部時，音樂會立刻變得空和薄。樂器較大、需要較多氣息，但不代表一定要身材高大才能學。適合穩定、可靠、喜歡支撐團隊的人。'},
+  percussion:{image:'assets/instruments/percussion.png.svg',category:'打擊樂器',description:'打擊樂不只是敲鼓，可能包含小鼓、大鼓、定音鼓、木琴、鐵琴、鈸和各種特殊音效樂器。打擊樂手需要看節奏、算小節、抓準進場時間，也常需要在不同樂器間快速切換。雖然有時會休息很多小節，但一出手就能決定速度、氣氛和整首曲子的張力。適合反應快、喜歡節奏、專注力好、能等待正確時機的人。'}
+};
+const MAX_SCORES={flute:19,clarinet:24,sax:24,trumpet:30,horn:26,trombone:17,tuba:27,percussion:29};
+const $=s=>document.querySelector(s);const screens=['start','song','quiz','result'];let state;
+function reset(){if(state?.audio)stopAudio();const backgroundAudio=$('#backgroundAudio');if(backgroundAudio){backgroundAudio.src=backgroundMusicConfig.audio;backgroundAudio.pause();backgroundAudio.currentTime=0}state={screen:'start',songQuestions:[],songIndex:0,songAttempts:[0,0,0],songSelections:[],songCorrect:0,quizIndex:0,answers:Array(10).fill(null),audio:null,backgroundAudio,playing:false,soundEnabled:true,levelTwoVariant:Math.random()<.5?'A':'B'};screens.forEach(id=>$('#'+id).classList.toggle('active',id==='start'));updateProgress();playBackground();}
+function updateProgress(){const map={start:[0,'準備開始'],song:[20,`第 ${state.songIndex+1} 關／猜歌挑戰`],quiz:[70,'命定樂器心理測驗'],result:[100,'完成！命定樂器']};const [pct,text]=map[state.screen];$('#progressBar').style.width=pct+'%';$('#progressPercent').textContent=pct+'%';$('#progressText').textContent=text;}
+function show(id){screens.forEach(x=>$('#'+x).classList.toggle('active',x===id));state.screen=id;updateProgress();window.scrollTo({top:0,behavior:'smooth'});}
+function getCurrentSong(){return state.songQuestions[state.songIndex]}
+function renderSong(){const q=getCurrentSong();state.songSelections=[];$('#songRound').textContent=`猜歌第 ${state.songIndex+1} 關／共 3 關`;$('#songDone').textContent=`已完成 ${state.songCorrect}／3`;
+  $('#songHeading').textContent=q.title;$('#songInstructions').textContent=`請選出混音中出現的 ${q.answer.length} 首歌。每關完全選對才能繼續，答錯可以重新聽與重新選擇。`;
+  $('#songAnswerCount').textContent=q.answer.length;$('#selectionCount').textContent='0';$('#songTitle').textContent=`第 ${state.songIndex+1} 關混音`;$('#songAudio').src=q.audio;$('#audioHint').textContent='點擊播放，聽聽看混音中有哪些歌曲';$('#playsLeft').textContent='可重複播放';$('#songFeedback').className='feedback';$('#songFeedback').textContent='';$('#songConfirmWrap').style.display='block';$('#songNextWrap').style.display='none';
+  const shuffled=[...q.options].sort(()=>Math.random()-.5);$('#songOptions').innerHTML=shuffled.map((o,i)=>`<button class="answer-option" data-answer="${o}" type="button">${String.fromCharCode(65+i)}. ${o}</button>`).join('');document.querySelectorAll('.answer-option').forEach(b=>b.onclick=()=>toggleSongSelection(b));
+}
+function toggleSongSelection(button){const answer=button.dataset.answer;const required=getCurrentSong().answer.length;const index=state.songSelections.indexOf(answer);if(index>=0){state.songSelections.splice(index,1);button.classList.remove('selected');}else if(state.songSelections.length<required){state.songSelections.push(answer);button.classList.add('selected');}else{$('#songFeedback').className='feedback wrong';$('#songFeedback').textContent=`本題只能選 ${required} 首歌`; }$('#selectionCount').textContent=state.songSelections.length;}
+function confirmSong(){const q=getCurrentSong(),fb=$('#songFeedback');if(state.songSelections.length!==q.answer.length){fb.className='feedback wrong';fb.textContent=`請先選擇 ${q.answer.length} 首歌，再確認答案。`;return}state.songAttempts[state.songIndex]++;const correctCount=state.songSelections.filter(answer=>q.answer.includes(answer)).length;const isCorrect=correctCount===q.answer.length&&state.songSelections.length===q.answer.length;if(isCorrect){state.songCorrect++;document.querySelectorAll('.answer-option').forEach(b=>b.disabled=true);$('#songConfirmWrap').style.display='none';fb.className='feedback correct';fb.textContent='全部答對！你的音樂雷達太強了吧！';$('#songNextWrap').style.display='block';$('#songDone').textContent=`已完成 ${state.songCorrect}／3`;if(state.songIndex===2){fb.textContent='三關完成！現在來測測你的命定樂器。';$('#songNext').textContent='前往命定樂器測驗 →';}}else{state.songSelections=[];document.querySelectorAll('.answer-option').forEach(b=>b.classList.remove('selected'));$('#selectionCount').textContent='0';fb.className='feedback wrong';fb.textContent=`還差一點！你目前選對了 ${correctCount} 首，再聽一次看看。`;}}
+function playBackground(){if(!state.soundEnabled||!state.backgroundAudio||state.playing)return;state.backgroundAudio.muted=false;state.backgroundAudio.volume=.35;const result=state.backgroundAudio.play();if(result)result.catch(()=>{});}
+function playAudio(){if(state.playing)return;const audio=$('#songAudio');state.audio=audio;state.playing=true;if(state.backgroundAudio)state.backgroundAudio.pause();audio.muted=!state.soundEnabled;audio.currentTime=0;audio.play().catch(()=>{$('#audioHint').textContent='找不到音檔，請確認 guess 資料夾內已有指定音檔。';state.playing=false;playBackground()});}
+function stopAudio(){const a=$('#songAudio');a.pause();state.playing=false;playBackground();}
+function toggleSound(){state.soundEnabled=!state.soundEnabled;const enabled=state.soundEnabled;$('#soundToggle').textContent=enabled?'🔊 聲音：開':'🔇 聲音：關';$('#soundToggle').setAttribute('aria-pressed',String(enabled));if(state.audio)state.audio.muted=!enabled;if(state.backgroundAudio){state.backgroundAudio.muted=!enabled;if(enabled&&!state.playing)playBackground();if(!enabled)state.backgroundAudio.pause();}}
+function renderQuiz(){const i=state.quizIndex,[question,options]=CONFIG.quiz[i];$('#quizCount').textContent=`第 ${i+1} 題／共 10 題`;$('#quizPercent').textContent=Math.round((i+1)/10*100)+'%';$('#quizProgress').style.width=((i+1)/10*100)+'%';$('#quizQuestion').textContent=question;$('#quizOptions').innerHTML=options.map((o,j)=>`<button type="button" class="quiz-option ${state.answers[i]===j?'selected':''}" data-index="${j}">${String.fromCharCode(65+j)}. ${o}</button>`).join('');document.querySelectorAll('.quiz-option').forEach(b=>b.onclick=()=>{state.answers[i]=Number(b.dataset.index);$('#quizFeedback').textContent='已選擇，現在可以進入下一題。';renderQuiz()});$('#quizBack').disabled=i===0;$('#quizNext').textContent=i===9?'查看我的命定樂器':'下一題 →';$('#quizFeedback').textContent=state.answers[i]===null?'請先選擇一個答案。':'已選擇，現在可以繼續。';}
+function calculateScores(){const scores=Object.fromEntries(Object.keys(MAX_SCORES).map(key=>[key,0]));state.answers.forEach((answer,questionIndex)=>{Object.entries(SCORE_VALUES[questionIndex][answer]).forEach(([key,value])=>{scores[key]+=value})});return scores}
+function getSongBonus(){if(state.songAttempts.some(attempt=>attempt===0))return 0;if(state.songAttempts.every(attempt=>attempt===1))return 10;if(state.songAttempts.some(attempt=>attempt===2))return 7;return 4}
+function getSuitability(key){const scores=calculateScores();const quizPercent=scores[key]/MAX_SCORES[key]*100;return quizPercent*.9+(getSongBonus()/10*100)*.1}
+function calculateResult(){const tieOrder=[5,8,9].flatMap(index=>Object.keys(SCORE_VALUES[index][state.answers[index]]));return Object.keys(MAX_SCORES).sort((a,b)=>{const suitabilityB=getSuitability(b),suitabilityA=getSuitability(a);if(suitabilityB!==suitabilityA)return suitabilityB-suitabilityA;return tieOrder.indexOf(a)-tieOrder.indexOf(b)})}
+function instrumentCard(key,rank){const data=CONFIG.instruments[key],meta=INSTRUMENT_META[key],percent=Math.round(getSuitability(key));const full=rank===1;return `<article class="instrument-card ${full?'featured':''}"><div class="instrument-image"><img src="${meta.image}" alt="${data.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span>${data.icon}<small>樂器圖片預留位置</small></span></div><div class="instrument-copy"><p class="mini-label">${full?'你的命定樂器':'也很適合嘗試'}</p><h3>${data.name}<strong>${percent}%</strong></h3><div class="tags">${data.tags.map(tag=>`<span>${tag}</span>`).join('')}</div><p class="instrument-category">${meta.category}</p><p>${meta.description}</p>${full?`<div class="instrument-details"><h4>樂團角色</h4><p>${data.role}</p><blockquote>「${data.quote}」</blockquote></div>`:`<details><summary>展開完整介紹</summary><p>${meta.description}</p><p><b>樂團角色：</b>${data.role}</p><blockquote>「${data.quote}」</blockquote></details>`}</div></article>`}
+function renderResult(){const ranking=calculateResult();$('#resultRecommendations').innerHTML=ranking.slice(0,3).map((key,index)=>instrumentCard(key,index+1)).join('');$('#qrImage').src=CONFIG.recruitment.qr;$('#qrLink').href=CONFIG.recruitment.url;$('#formLink').href=CONFIG.recruitment.url;show('result')}
+function prepareGuessLevels(){const first=CONFIG.guessLevels[0];const second=CONFIG.guessLevels[1].variants[state.levelTwoVariant==='A'?0:1];const third=CONFIG.guessLevels[2];state.songQuestions=[first,second,third];}
+$('#startButton').onclick=()=>{prepareGuessLevels();state.songIndex=0;state.songAttempts=[0,0,0];state.songCorrect=0;renderSong();show('song');playBackground()};$('#soundToggle').onclick=toggleSound;$('#playAudio').onclick=playAudio;$('#pauseAudio').onclick=stopAudio;$('#replayAudio').onclick=()=>{stopAudio();playAudio()};$('#songConfirm').onclick=confirmSong;$('#songAudio').onended=()=>{state.playing=false;$('#audioHint').textContent='播放結束，可以重新選擇答案。';playBackground()};$('#songNext').onclick=()=>{stopAudio();if(state.songIndex<2){state.songIndex++;renderSong();updateProgress()}else{state.quizIndex=0;renderQuiz();show('quiz');playBackground()}};$('#quizBack').onclick=()=>{if(state.quizIndex>0){state.quizIndex--;renderQuiz()}};$('#quizNext').onclick=()=>{if(state.answers[state.quizIndex]===null){const feedback=$('#quizFeedback');feedback.textContent='請先選擇一個答案，再繼續。';$('#quizQuestion').animate([{color:'#ef795f'},{color:'#19324a'}],300);return}if(state.quizIndex<9){state.quizIndex++;renderQuiz()}else renderResult()};document.querySelectorAll('.restart').forEach(b=>b.onclick=()=>reset());
+const mobileDevice=/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)||window.matchMedia('(max-width: 1023px)').matches;document.body.classList.toggle('mobile-device',mobileDevice);reset();
